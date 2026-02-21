@@ -5,6 +5,7 @@ from ....connector.local_serial.local_serial import send_serial_command
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from homeassistant.helpers.entity import async_generate_entity_id
 from homeassistant.helpers.entity_component import EntityComponent
+from homeassistant.components.sensor import SensorEntity
 
 from .data_parser import extract_data_from_message
 import asyncio
@@ -69,15 +70,15 @@ async def generate_sensors(hass, bms_type, port, config_battery_address, sensor_
             self._config_battery_address = config_battery_address
 
         @property
-        def state(self):
+        def native_value(self):
             if self._calc_function:
                 result = self._calc_function(self.coordinator.data)
                 _LOGGER.debug("Derived sensor '%s' calculated value: %s", self._name, result)
                 return result
-            return super().state
+            return getattr(super(), "native_value", None)
             
         @property
-        def unit_of_measurement(self):
+        def native_unit_of_measurement(self):
             if self._calc_function:
                 result = self._calc_function(self.coordinator.data)
                 if isinstance(result, bool):
@@ -292,7 +293,7 @@ async def generate_sensors(hass, bms_type, port, config_battery_address, sensor_
 
     async_add_entities(sensors, True)
 
-class SeplosBMSSensorBase(CoordinatorEntity):
+class SeplosBMSSensorBase(CoordinatorEntity, SensorEntity):
     def interpret_alarm(self, event, value):
         flags = ALARM_MAPPINGS.get(event, [])
 
@@ -329,10 +330,10 @@ class SeplosBMSSensorBase(CoordinatorEntity):
         return f"{prefix}{self._name}"
 
     @property
-    def state(self):
+    def native_value(self):
         """Return the state of the sensor."""
         if not self._attribute:  # Check if attribute is None or empty
-            return super().state
+            return getattr(super(), "native_value", None)
 
         base_attribute = self._attribute.split('[')[0] if '[' in self._attribute else self._attribute
 
@@ -363,7 +364,7 @@ class SeplosBMSSensorBase(CoordinatorEntity):
 
 
     @property
-    def unit_of_measurement(self):
+    def native_unit_of_measurement(self):
         """Return the unit of measurement."""
         if self._attribute in ALARM_ATTRIBUTES:
             return None  # No unit for alarms
