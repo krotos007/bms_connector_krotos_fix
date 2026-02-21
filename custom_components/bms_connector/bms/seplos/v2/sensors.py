@@ -354,7 +354,7 @@ class SeplosBMSSensorBase(CoordinatorEntity, SensorEntity):
                 _LOGGER.debug("Current seems to be None, setting to 0.00 to fix HA reporting as unknown")
                 return 0.00
             else:
-                _LOGGER.warning("No data found in telemetry or alarms for %s. Telemetry: %s", self._name, telemetry_data)
+                _LOGGER.warning("No data found in telemetry or alarms for %s. Coordinator data: %s", self._name, self.coordinator.data)
                 return None
                 
 
