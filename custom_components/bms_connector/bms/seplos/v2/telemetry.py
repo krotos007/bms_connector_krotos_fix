@@ -35,45 +35,51 @@ class Telemetry:
             f"portVoltage: {self.portVoltage}"
         )
 
+def safe_int(s, base=16, default=0):
+    try:
+        return int(s, base)
+    except (ValueError, TypeError, IndexError):
+        return default
+
 def parse_telemetry_info(info_str):
     result = Telemetry()
     cursor = 4
 
-    result.cellsCount = int(info_str[cursor:cursor+2], 16)
+    result.cellsCount = safe_int(info_str[cursor:cursor+2])
     cursor += 2
     for i in range(result.cellsCount):
-        result.cellVoltage.append(int(info_str[cursor:cursor+4], 16))
+        result.cellVoltage.append(safe_int(info_str[cursor:cursor+4]))
         cursor += 4
 
-    result.tempCount = int(info_str[cursor:cursor+2], 16)
+    result.tempCount = safe_int(info_str[cursor:cursor+2])
     cursor += 2
     for i in range(result.tempCount):
-        temperature = (int(info_str[cursor:cursor+4], 16) - 2731) / 10
+        temperature = (safe_int(info_str[cursor:cursor+4]) - 2731) / 10
         result.temperatures.append(temperature)
         cursor += 4
 
-    result.current = int(info_str[cursor:cursor+4], 16)
+    result.current = safe_int(info_str[cursor:cursor+4])
     if result.current > 32767:
         result.current -= 65536 
     result.current /= 100 
     cursor += 4
-    result.voltage = int(info_str[cursor:cursor+4], 16) / 100
+    result.voltage = safe_int(info_str[cursor:cursor+4]) / 100
     cursor += 4
-    result.resCap = int(info_str[cursor:cursor+4], 16) / 100
+    result.resCap = safe_int(info_str[cursor:cursor+4]) / 100
     cursor += 4
-    result.customNumber = int(info_str[cursor:cursor+2], 16)
+    result.customNumber = safe_int(info_str[cursor:cursor+2])
     cursor += 2
-    result.capacity = int(info_str[cursor:cursor+4], 16) / 100
+    result.capacity = safe_int(info_str[cursor:cursor+4]) / 100
     cursor += 4
-    result.soc = int(info_str[cursor:cursor+4], 16) / 10
+    result.soc = safe_int(info_str[cursor:cursor+4]) / 10
     cursor += 4
-    result.ratedCapacity = int(info_str[cursor:cursor+4], 16) / 100
+    result.ratedCapacity = safe_int(info_str[cursor:cursor+4]) / 100
     cursor += 4
-    result.cycles = int(info_str[cursor:cursor+4], 16)
+    result.cycles = safe_int(info_str[cursor:cursor+4])
     cursor += 4
-    result.soh = int(info_str[cursor:cursor+4], 16) / 10
+    result.soh = safe_int(info_str[cursor:cursor+4]) / 10
     cursor += 4
-    result.portVoltage = int(info_str[cursor:cursor+4], 16) / 100
+    result.portVoltage = safe_int(info_str[cursor:cursor+4]) / 100
 
     return result
 
