@@ -131,7 +131,7 @@ async def generate_sensors(hass, bms_type, port, config_battery_address, sensor_
             SeplosBMSSensorBase(coordinator, port, "tempCount", "Temperature Count", "", battery_address=battery_address, sensor_prefix=sensor_prefix),
             SeplosBMSSensorBase(coordinator, port, "resCap", "Residual Capacity", "Ah", battery_address=battery_address, sensor_prefix=sensor_prefix),
             SeplosBMSSensorBase(coordinator, port, "capacity", "Capacity", "Ah", battery_address=battery_address, sensor_prefix=sensor_prefix),
-            SeplosBMSSensorBase(coordinator, port, "soc", "State of Charge", "%", battery_address=battery_address, sensor_prefix=sensor_prefix),
+            SeplosBMSSensorBase(coordinator, port, "soc", "SOC", "%", battery_address=battery_address, sensor_prefix=sensor_prefix),
             SeplosBMSSensorBase(coordinator, port, "ratedCapacity", "Rated Capacity", "Ah", battery_address=battery_address, sensor_prefix=sensor_prefix),
             SeplosBMSSensorBase(coordinator, port, "cycles", "Cycles", "", battery_address=battery_address, sensor_prefix=sensor_prefix),
             SeplosBMSSensorBase(coordinator, port, "soh", "State of Health", "%", battery_address=battery_address, sensor_prefix=sensor_prefix),
@@ -159,7 +159,7 @@ async def generate_sensors(hass, bms_type, port, config_battery_address, sensor_
         ]
     )
     setting_sensors = [
-        SeplosBMSSensorBase(coordinator, port, "soc_ah", "SOC", "Ah", "mdi:gauge", battery_address=battery_address, sensor_prefix=sensor_prefix),
+        SeplosBMSSensorBase(coordinator, port, "soc_ah", "Settings Capacity SOC", "Ah", "mdi:gauge", battery_address=battery_address, sensor_prefix=sensor_prefix),
         SeplosBMSSensorBase(coordinator, port, "monomer_high_voltage_alarm", "Monomer High Voltage Alarm", "mV", "mdi:flash-circle", battery_address=battery_address, sensor_prefix=sensor_prefix),
         SeplosBMSSensorBase(coordinator, port, "overcurrent_delay_recovery", "Overcurrent Delay Recovery", "s", "mdi:timer-sand", battery_address=battery_address, sensor_prefix=sensor_prefix),
         SeplosBMSSensorBase(coordinator, port, "total_voltage_overvoltage_protection", "Total Voltage Overvoltage Protection (mV)", "mV", "mdi:flash-circle", battery_address=battery_address, sensor_prefix=sensor_prefix),

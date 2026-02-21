@@ -63,7 +63,7 @@ class ProtectionSettingsData:
         self.transient_overcurrent_protection = settings[56]
         self.output_soft_start_delay = settings[57]
         self.battery_rated_capacity = settings[58]
-        self.soc = settings[59]
+        self.soc_ah = settings[59]
         self.cell_invalidation_differential_pressure = settings[60]
         self.cell_invalidation_recovery = settings[61]
         self.equalization_opening_pressure_difference = settings[62]
