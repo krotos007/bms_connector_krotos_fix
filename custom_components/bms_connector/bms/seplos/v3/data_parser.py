@@ -192,6 +192,8 @@ def extract_data_from_message(msg, telemetry_requested=True, teledata_requested=
     address_string1 = None
     address_string2 = None
     address_string3 = None
+    pia_data = V3PIATableData()
+    pib_data = V3PIBTableData()
     
     # WHOLE SECTION NEEDS WORK
 

@@ -26,10 +26,10 @@ def get_cid2(message_hex_str):
     return CID2
           
 def extract_data_from_message(msg, telemetry_requested=True, teledata_requested=True, debug=True):
-    processed_data = None
-    processed_data1 = None
-    processed_data2 = None
-    processed_data3 = None
+    processed_data = Telemetry()
+    processed_data1 = Alarms()
+    processed_data2 = ProtectionSettingsData()
+    processed_data3 = BMSSystemDetails()
     address_string = None
     address_string1 = None
     address_string2 = None
