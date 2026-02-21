@@ -1,15 +1,15 @@
 {
-  "domain": "bms_connector",
-  "name": "BMS Connector",
-  "codeowners": [
-    "@flip555"
-  ],
-  "config_flow": true,
-  "dependencies": [],
-  "documentation": "https://github.com/flip555/bms_connector",
-  "integration_type": "hub",
-  "iot_class": "local_polling",
-  "issue_tracker": "https://github.com/flip555/bms_connector/issues",
-  "requirements": [],
-  "version": "1.1.2-krotos"
+    "domain": "bms_connector",
+    "name": "BMS Connector",
+    "codeowners": [
+        "@flip555"
+    ],
+    "config_flow": true,
+    "dependencies": [],
+    "documentation": "https://github.com/flip555/bms_connector",
+    "integration_type": "hub",
+    "iot_class": "local_polling",
+    "issue_tracker": "https://github.com/flip555/bms_connector/issues",
+    "requirements": [],
+    "version": "1.1.4-krotos"
 }
