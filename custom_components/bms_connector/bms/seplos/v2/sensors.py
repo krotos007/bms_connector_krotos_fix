@@ -342,6 +342,7 @@ class SeplosBMSSensorBase(CoordinatorEntity, SensorEntity):
             interpreted_value = str(self.interpret_alarm(base_attribute, value))
             _LOGGER.debug("Interpreted value for %s: %s", base_attribute, interpreted_value)
             return interpreted_value   
+            
         if value is None or value == '':
             if base_attribute == 'current':
                 _LOGGER.debug("Current seems to be None, setting to 0.00 to fix HA reporting as unknown")
@@ -349,8 +350,6 @@ class SeplosBMSSensorBase(CoordinatorEntity, SensorEntity):
             else:
                 _LOGGER.warning("No data found in telemetry or alarms for %s. Coordinator data: %s", self._name, self.coordinator.data)
                 return None
-                
-
 
         _LOGGER.debug("Sensor state for %s: %s", self._name, value)
         return value
